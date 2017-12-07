@@ -2,7 +2,7 @@
 
 Stylus Naming Conventions and Style Guide();
 
-Inspired by the [Airbnb CSS / Sass Styleguide](Airbnb CSS / Sass Styleguide).
+Inspired by the [Airbnb CSS / Sass Styleguide](https://github.com/airbnb/css)
 
 ## Table of Contents
 
@@ -15,7 +15,11 @@ Inspired by the [Airbnb CSS / Sass Styleguide](Airbnb CSS / Sass Styleguide).
     - [Formatting](#formatting)
     - [ID Selectors](#id-selectors)
     - [JavaScript hooks](#javascript-hooks)
+    - [Nested Selectors](#nested-selectors)
     - [Ordering](#ordering-of-property-declarations)
+    - [Variables](#variables)
+    - [Mixins](#mixins)
+
 
 ## Terminology
 
@@ -123,6 +127,26 @@ We recommend creating JavaScript-specific classes to bind to, prefixed with `.js
 <button class="btn btn-primary js-request-to-book">Request to Book</button>
 ```
 
+### Nested selectors
+
+**Do not nest selectors more than three levels deep!**
+
+```scss
+.page-container
+  .content
+    .profile
+      // STOP!
+```
+
+When selectors become this long, you're likely writing CSS that is:
+  * Strongly coupled to the HTML (fragile) *—OR—*
+  * Overly specific (powerful) *—OR—*
+  * Not reusable
+
+Again: **never nest ID selectors!**
+
+If you must use an ID selector in the first place (and you should really try not to), they should never be nested. If you find yourself doing this, you need to revisit your markup, or figure out why such strong specificity is needed. If you are writing well formed HTML and CSS, you should **never** need to do this.
+
 ### Ordering of property declarations
 
 1. Property declarations
@@ -162,5 +186,87 @@ We recommend creating JavaScript-specific classes to bind to, prefixed with `.js
 
     ```
 
+### Variables
+
+Prefer camelCased variable names (e.g. `myVariable`) over dash-cased or snake_cased variable names. It is acceptable to prefix variable names that are intended to be used only within the same file with an underscore (e.g. `_myVariable`).
+
+All variables are assigned using the `=` symbol with one space before and after the `=` symbol.
+
+Color variables should follow the naming convention of prepending the name of the color with the word **color**, this assists with auto suggest as typing color will suggest all color variables.
+
+Font variables follow the same convention as the color variables where the word **font** precedes the font name.
+
+**Bad**
+
+```scss
+my-color = #efefef;
+homePurple = #r99812;
+roboto = 'Roboto', sans-serif
+nunito-font = 'Nunito', sans-serif
+```
+
+**Good**
+
+```scss
+//Colours
+colorGrey = #efefef
+colorHomePurple = #r99812
+
+//Fonts
+fontRoboto = 'Roboto', sans-serif
+fontNunito = 'Nunito', sans-serif
+
+
+```
+
+[Stylus Variable Documentation](http://stylus-lang.com/docs/variables.html)
+
+### Mixins
+
+Mixins should be used to DRY up your code, add clarity, or abstract complexity--in much the same way as well-named functions. Mixins that accept no arguments can be useful for this.
+
+### Example
+
+```html
+<div class="btn btn-primary">
+  <icon class="icon email-icon"></icon>
+  But Now
+</div>
+```
+
+**Bad**
+
+```scss
+.btn
+  color: red
+  border:2px solid white
+
+.btn.btn-primary
+  background: blue
+
+.btn.btn-primary .icon.email-icon
+  color: blue
+  border:2px solid black
+```
+
+**Good**
+
+```scss
+button()
+  color: red
+  border:2px solid white
+
+.btn
+  button()
+  &.btn-primary
+    background: blue
+
+  &.btn-warning
+    color red
+    .icon
+      &.email-icon
+        font-size 12pt
+
+```
 
 **[⬆ back to top](#table-of-contents)**
