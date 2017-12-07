@@ -15,45 +15,44 @@ Inspired by the [Airbnb CSS / Sass Styleguide](Airbnb CSS / Sass Styleguide).
     - [Formatting](#formatting)
     - [ID Selectors](#id-selectors)
     - [JavaScript hooks](#javascript-hooks)
-    - [Border](#border)
-    - 
+    - [Ordering](#ordering-of-property-declarations)
+
 ## Terminology
 
 ### Rule declaration
 
 A “rule declaration” is the name given to a selector (or a group of selectors) with an accompanying group of properties. Here's an example:
 
-```css
-.listing {
-  font-size: 18px;
-  line-height: 1.2;
-}
+```scss
+.listing
+  font-size: 18px
+  line-height: 1.2
 ```
 
 ### Selectors
 
 In a rule declaration, “selectors” are the bits that determine which elements in the DOM tree will be styled by the defined properties. Selectors can match HTML elements, as well as an element's class, ID, or any of its attributes. Here are some examples of selectors:
 
-```css
-.my-element-class {
+```scss
+.my-element-class
   /* ... */
-}
 
-[aria-hidden] {
+[aria-hidden]
   /* ... */
-}
+
 ```
 
 ### Properties
 
 Finally, properties are what give the selected elements of a rule declaration their style. Properties are key-value pairs, and a rule declaration can contain one or more property declarations. Property declarations look like this:
 
-```css
-/* some selector */ {
+```scss
+/* some selector */
   background: #f1f1f1;
-  color: #333;
-}
+  color: #333
+
 ```
+
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -124,23 +123,44 @@ We recommend creating JavaScript-specific classes to bind to, prefixed with `.js
 <button class="btn btn-primary js-request-to-book">Request to Book</button>
 ```
 
-### Border
+### Ordering of property declarations
 
-Use `0` instead of `none` to specify that a style has no border.
+1. Property declarations
 
-**Bad**
+    List all standard property declarations **first**, that is anything that isn't an `@include` or a nested selector.
 
-```css
-.foo {
-  border: none;
-}
-```
+    ```scss
+    .btn-green
+      background: green
+      font-weight: bold
+    ```
 
-**Good**
+2. `@include` declarations
 
-```css
-.foo {
-  border: 0;
-}
-```
+    Grouping `@include`s at the end makes it easier to read the entire selector.
+
+    ```scss
+    .btn-green
+      background: green
+      font-weight: bold
+      @include transition(background 0.5s ease)
+      // ...
+    ```
+
+3. Nested selectors
+
+    Nested selectors, _if necessary_, go last, and nothing goes after them. Add whitespace between your rule declarations and nested selectors, as well as between adjacent nested selectors. Apply the same guidelines as above to your nested selectors.
+
+    ```scss
+    .btn
+      background: green
+      font-weight: bold
+      @include transition(background 0.5s ease)
+
+      .icon
+        margin-right: 10px
+
+    ```
+
+
 **[⬆ back to top](#table-of-contents)**
