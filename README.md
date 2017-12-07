@@ -1,4 +1,4 @@
-# Eeleven Stylus / CSS in JS Styleguide
+# Eeleven Stylus Styleguide
 
 Stylus Naming Conventions and Style Guide();
 
