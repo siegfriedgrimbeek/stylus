@@ -13,7 +13,10 @@ Inspired by the [Airbnb CSS / Sass Styleguide](Airbnb CSS / Sass Styleguide).
 
 2. [Stylus](#stylus)
     - [Formatting](#formatting)
-
+    - [ID Selectors](#id-selectors)
+    - [JavaScript hooks](#javascript-hooks)
+    - [Border](#border)
+    - 
 ## Terminology
 
 ### Rule declaration
@@ -60,48 +63,84 @@ Finally, properties are what give the selected elements of a rule declaration th
 ### Formatting
 
 * Use soft tabs (2 spaces) for indentation
-* Prefer dashes over camelCasing in class names.
-  - Underscores and PascalCasing are okay if you are using BEM (see [OOCSS and BEM](#oocss-and-bem) below).
+* Use dashes over camelCase for class names
 * Do not use ID selectors
 * When using multiple selectors in a rule declaration, give each selector its own line.
-* Put a space before the opening brace `{` in rule declarations
-* In properties, put a space after, but not before, the `:` character.
-* Put closing braces `}` of rule declarations on a new line
+* Use a single `:` character for a rule declaration
+* * In properties, put a space after, but not before, the `:` character
+* Do not follow a rule declaration up with a `;` character
 * Put blank lines between rule declarations
 
 **Bad**
 
-```css
-.avatar{
+```scss
+.avatar
     border-radius:50%;
-    border:2px solid white; }
-.no, .nope, .not_good {
-    // ...
-}
-#lol-no {
-  // ...
+    border:2px solid white;
+.no, .nope, .not_good
+    border:2px solid white;
+
+#lol-no
+  border:2px solid white;
+
+```
+
+**Good**
+
+```scss
+.avatar
+  border-radius: 50%
+  border: 2px solid white
+
+.one,
+.selector,
+.per-line
+  border:2px solid white
+
+```
+
+### Comments
+
+* Prefer line comments (`//`) to block comments
+* Prefer comments on their own line. Avoid end-of-line comments
+* Write detailed comments for code that isn't self-documenting:
+  - Uses of z-index
+  - Compatibility or browser-specific hacks
+
+
+### ID selectors
+
+While it is possible to select elements by ID in CSS, it should generally be considered an anti-pattern. ID selectors introduce an unnecessarily high level of [specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) to your rule declarations, and they are not reusable.
+
+For more on this subject, read [CSS Wizardry's article](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/) on dealing with specificity.
+
+### JavaScript hooks
+
+Avoid binding to the same class in both your CSS and JavaScript. Conflating the two often leads to, at a minimum, time wasted during refactoring when a developer must cross-reference each class they are changing, and at its worst, developers being afraid to make changes for fear of breaking functionality.
+
+We recommend creating JavaScript-specific classes to bind to, prefixed with `.js-`:
+
+```html
+<button class="btn btn-primary js-request-to-book">Request to Book</button>
+```
+
+### Border
+
+Use `0` instead of `none` to specify that a style has no border.
+
+**Bad**
+
+```css
+.foo {
+  border: none;
 }
 ```
 
 **Good**
 
 ```css
-.avatar {
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-.one,
-.selector,
-.per-line {
-  // ...
+.foo {
+  border: 0;
 }
 ```
-
-### Comments
-
-* Prefer line comments (`//` in Sass-land) to block comments.
-* Prefer comments on their own line. Avoid end-of-line comments.
-* Write detailed comments for code that isn't self-documenting:
-  - Uses of z-index
-  - Compatibility or browser-specific hacks
+**[⬆ back to top](#table-of-contents)**
