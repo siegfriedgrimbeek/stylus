@@ -11,7 +11,11 @@ Inspired by the [Airbnb CSS / Sass Styleguide](https://github.com/airbnb/css)
     - [Selectors](#selectors)
     - [Properties](#properties)
 
-2. [Stylus](#stylus)
+2. [General](#general)
+    - [Folder Structure](#folder-structure)
+    - [Naming Conventions](#naming-conventions)
+
+3. [Stylus](#stylus)
     - [Formatting](#formatting)
     - [ID Selectors](#id-selectors)
     - [JavaScript hooks](#javascript-hooks)
@@ -19,6 +23,7 @@ Inspired by the [Airbnb CSS / Sass Styleguide](https://github.com/airbnb/css)
     - [Ordering](#ordering-of-property-declarations)
     - [Variables](#variables)
     - [Mixins](#mixins)
+    - [Code Example](#code-example)
 
 
 ## Terminology
@@ -35,7 +40,9 @@ A “rule declaration” is the name given to a selector (or a group of selector
 
 ### Selectors
 
-In a rule declaration, “selectors” are the bits that determine which elements in the DOM tree will be styled by the defined properties. Selectors can match HTML elements, as well as an element's class, ID, or any of its attributes. Here are some examples of selectors:
+In a rule declaration, “selectors” are the bits that determine which elements in the DOM tree will be styled by the defined properties. Selectors can match HTML elements, as well as an element's class, ID, or any of its attributes.
+
+Here are some examples of selectors:
 
 ```scss
 .my-element-class
@@ -48,18 +55,48 @@ In a rule declaration, “selectors” are the bits that determine which element
 
 ### Properties
 
-Finally, properties are what give the selected elements of a rule declaration their style. Properties are key-value pairs, and a rule declaration can contain one or more property declarations. Property declarations look like this:
+Finally, properties are what give the selected elements of a rule declaration their style. Properties are key-value pairs, and a rule declaration can contain one or more property declarations.
+
+Property declarations look like this:
 
 ```scss
 /* some selector */
-  background: #f1f1f1;
+  background: #f1f1f1
   color: #333
 
 ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top] (#table-of-contents)**
 
+## General
+
+### Folder Structure
+The folder structure of the stylus code should follow the folder structure of the components as closely as possible.
+
+A user should not have to search for any code, it should either be in the component specific stylus file or in the mixins file.
+
+```styl
+./form
+  |-- variables.styl
+  |-- mixins.styl
+
+./product
+  |-- body.styl
+  |-- form.styl
+  |-- foot.styl
+  |-- head.styl
+```
+
+### Naming Conventions
+
+Clear and concise class names should be given to each element. If in doubt of naming, consult with the team to determine an acceptable name.
+
+Use dashes over camelCase for class names.
+
+File specific **variables** should be easily distinguished by using the underscore naming convention as per the [Variables](#variables) section.
+
+**[⬆ back to top] (#table-of-contents)**
 
 ## Stylus
 
@@ -70,7 +107,7 @@ Finally, properties are what give the selected elements of a rule declaration th
 * Do not use ID selectors
 * When using multiple selectors in a rule declaration, give each selector its own line.
 * Use a single `:` character for a rule declaration
-* * In properties, put a space after, but not before, the `:` character
+  - In properties, put a space after, but not before, the `:` character
 * Do not follow a rule declaration up with a `;` character
 * Put blank lines between rule declarations
 
@@ -159,15 +196,15 @@ If you must use an ID selector in the first place (and you should really try not
       font-weight: bold
     ```
 
-2. `@include` declarations
+2. **Mixin** declarations
 
-    Grouping `@include`s at the end makes it easier to read the entire selector.
+    Grouping **Mixins** at the end makes it easier to read the entire selector.
 
     ```scss
     .btn-green
       background: green
       font-weight: bold
-      @include transition(background 0.5s ease)
+      transition(background 0.5s ease)
       // ...
     ```
 
@@ -179,7 +216,7 @@ If you must use an ID selector in the first place (and you should really try not
     .btn
       background: green
       font-weight: bold
-      @include transition(background 0.5s ease)
+      transition(background 0.5s ease)
 
       .icon
         margin-right: 10px
@@ -225,7 +262,7 @@ fontNunito = 'Nunito', sans-serif
 
 Mixins should be used to DRY up your code, add clarity, or abstract complexity--in much the same way as well-named functions. Mixins that accept no arguments can be useful for this.
 
-### Example
+### Code Example
 
 ```html
 <div class="btn btn-primary">
