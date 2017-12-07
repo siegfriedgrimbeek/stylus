@@ -4,6 +4,14 @@ Stylus Naming Conventions and Style Guide();
 
 Inspired by the [Airbnb CSS / Sass Styleguide](https://github.com/airbnb/css)
 
+Official Stylus documentation: http://stylus-lang.com/docs/
+
+Stylus Playground:
+http://stylus-lang.com/try.html
+
+Practise Project:
+https://github.com/siegfriedgrimbeek/stylus-training
+
 ## Table of Contents
 
 1. [Terminology](#terminology)
@@ -67,7 +75,7 @@ Property declarations look like this:
 ```
 
 
-**[⬆ back to top] (#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## General
 
@@ -96,7 +104,7 @@ Use dashes over camelCase for class names.
 
 File specific **variables** should be easily distinguished by using the underscore naming convention as per the [Variables](#variables) section.
 
-**[⬆ back to top] (#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Stylus
 
